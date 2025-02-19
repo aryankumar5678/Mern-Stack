@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task-13</title>
+</head>
+<body>
+    <h1>User Registration and Display System</h1>
+    <button onclick="window.location.href='register.html'">Register</button>
+    <button onclick="window.location.href='view.html'">View Users</button>
+
+    <script>
+        // Register Page
+        function registerUser() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const contact = document.getElementById('contact').value;
+            const address = document.getElementById('address').value;
+
+            const user = { name, email, contact, address };
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            users.push(user);
+            localStorage.setItem('users', JSON.stringify(users));
+            alert('User registered successfully');
+            document.getElementById('registerForm').reset();
+        }
+
+        // View Page
+        function displayUsers() {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const table = document.getElementById('userTable');
+            users.forEach(user => {
+                const row = table.insertRow();
+                row.insertCell(0).innerText = user.name;
+                row.insertCell(1).innerText = user.email;
+                row.insertCell(2).innerText = user.contact;
+                row.insertCell(3).innerText = user.address;
+            });
+        }
+    </script>
+</body>
+</html>
